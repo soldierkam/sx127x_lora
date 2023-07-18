@@ -325,6 +325,7 @@ where
         delay: &mut dyn DelayMs<u8>,
     ) -> Result<usize, Error<E, CS::Error, RESET::Error>> {
         self.set_mode(RadioMode::RxContinuous)?;
+        self.write_register(Register::RegDioMapping1.addr(), 0x00);
         match timeout_ms {
             Some(value) => {
                 let mut count = 0;
